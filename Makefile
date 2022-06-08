@@ -17,7 +17,7 @@ $(OPENWRT)/.config: config.ac1200pro
 
 .PHONY: apply-patches
 apply-patches: unapply-patches
-	git -C $(OPENWRT) am < patches/openwrt/0001-Change-default-login-credentials.patch
+	echo "skipping: `git -C $(OPENWRT) am < patches/openwrt/0001-Change-default-login-credentials.patch`"
 
 .PHONY: unapply-patches
 unapply-patches:
