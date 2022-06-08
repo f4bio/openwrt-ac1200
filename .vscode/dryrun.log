@@ -1,0 +1,14 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/f4bio/workspace/openwrt-ac1200'
+cp feeds.conf repos/openwrt/feeds.conf
+cd repos/openwrt; scripts/feeds update -a
+cd repos/openwrt; scripts/feeds install -a
+cp config.ac1200pro repos/openwrt/.config
+make -C repos/openwrt defconfig
+git submodule update --init
+git -C repos/openwrt am < patches/openwrt/0001-Change-default-login-credentials.patch
+make -C repos/openwrt download
+ionice -c 3 nice -n19 make -C repos/openwrt -j8
+ln -sf repos/openwrt/bin/targets/ramips/mt7621/ ./firmware
+make: Leaving directory '/home/f4bio/workspace/openwrt-ac1200'
+ 
